@@ -1,0 +1,4 @@
+/client/node_modules
+/api/bin
+/api/obj
+/api/.vs
