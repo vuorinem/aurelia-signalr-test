@@ -1,0 +1,11 @@
+<template>
+  <ul>
+    <li repeat.for="item of items">
+      <label>
+        <input type="checkbox" checked.bind="item.isDone" />
+        ${ item.label }
+        <a href="#" click.delegate="remove(item)">(remove)</a>
+      </label>
+    </li>
+  </ul>
+</template>

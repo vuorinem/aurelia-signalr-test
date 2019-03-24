@@ -1,3 +1,9 @@
 <template>
-  <h1>${message}</h1>
+  <h1>TODO</h1>
+  <todo-list></todo-list>
+
+  <p>
+    <input type="text" value.bind="newItem" />
+    <button click.delegate="add(newItem)">Add</button>
+  </p>
 </template>
