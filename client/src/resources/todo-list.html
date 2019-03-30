@@ -2,7 +2,7 @@
   <ul>
     <li repeat.for="item of items">
       <label>
-        <input type="checkbox" checked.bind="item.isDone" />
+        <input type="checkbox" checked.bind="item.isDone" change.delegate="save(item)" />
         ${ item.label }
         <a href="#" click.delegate="remove(item)">(remove)</a>
       </label>

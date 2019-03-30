@@ -18,6 +18,13 @@ export class TodoList implements ComponentAttached {
     this.items = await response.json();
   }
 
+  private save(item: Item) {
+    this.httpClient.fetch(`/items/${item.id}`, {
+      method: 'put',
+      body: json(item),
+    });
+  }
+
   private remove(item: Item) {
     this.httpClient.fetch(`/items/${item.id}`, {
       method: 'delete',
