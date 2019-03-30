@@ -1,2 +1,2 @@
 # aurelia-signalr-test
-Testing SignalR as Aurelia binding behaviour
+Testing SignalR with Aurelia
