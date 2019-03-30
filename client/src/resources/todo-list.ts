@@ -1,16 +1,28 @@
-import { autoinject, ComponentAttached } from "aurelia-framework";
-import { HttpClient } from "aurelia-fetch-client";
+import * as signalR from "@aspnet/signalr";
+import { autoinject, ComponentAttached, ComponentDetached } from "aurelia-framework";
+import { HttpClient, json } from "aurelia-fetch-client";
 
 @autoinject
-export class TodoList implements ComponentAttached {
-
+export class TodoList implements ComponentAttached, ComponentDetached {
+  private connection: signalR.HubConnection;
   private items: Item[] = [];
 
   constructor(private httpClient: HttpClient) {
   }
 
   public async attached() {
+    this.connection = new signalR.HubConnectionBuilder()
+      .withUrl('http://localhost:5000/hub')
+      .build();
+
+    this.connection.on("update", () => this.update());
+
+    await this.connection.start();
     await this.update();
+  }
+
+  public detached() {
+    this.connection.stop();
   }
 
   private async update() {
