@@ -8,6 +8,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@aspnet/signalr": "^1.1.2",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "^2.3.2",
     "aurelia-fetch-client": "^1.8.2"
