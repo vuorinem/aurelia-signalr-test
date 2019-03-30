@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AureliaSignalRTest.Hubs;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,8 @@ namespace AureliaSignalRTest {
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSignalR();
+            services.AddSingleton(new ItemsHub());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -27,7 +30,8 @@ namespace AureliaSignalRTest {
             {
                 app.UseDeveloperExceptionPage();
                 app.UseCors(options => {
-                    options.AllowAnyOrigin();
+                    options.WithOrigins("http://localhost:8080");
+                    options.AllowCredentials();
                     options.AllowAnyMethod();
                     options.AllowAnyHeader();
                 });
@@ -40,6 +44,10 @@ namespace AureliaSignalRTest {
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            app.UseSignalR(options => {
+                options.MapHub<ItemsHub>("/hub");
+            });
         }
     }
 }
