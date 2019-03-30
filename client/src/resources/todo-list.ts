@@ -12,7 +12,7 @@ export class TodoList implements ComponentAttached, ComponentDetached {
 
   public async attached() {
     this.connection = new signalR.HubConnectionBuilder()
-      .withUrl('http://localhost:5000/hub')
+      .withUrl('https://localhost:5001/hub')
       .build();
 
     this.connection.on("update", () => this.update());
